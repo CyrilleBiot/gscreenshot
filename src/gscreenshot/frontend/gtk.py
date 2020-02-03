@@ -162,6 +162,15 @@ class Controller(object):
             if appinfo.launch_uris(["file://"+fname], None):
                 self.quit(None)
 
+    def on_imlib2_selected(self, *_):
+        self._app.set_screenshooter('imlib2')
+
+    def on_scrot_selected(self, *_):
+        self._app.set_screenshooter('scrot')
+
+    def on_imagemagick_selected(self, *_):
+        self._app.set_screenshooter('imagemagick')
+
     def on_button_copy_clicked(self, *_):
         """
         Copy the current screenshot to the clipboard

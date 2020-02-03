@@ -32,8 +32,8 @@ class Gscreenshot(object):
         constructor
         """
 
-        factory = ScreenshooterFactory(screenshooter)
-        self.screenshooter = factory.create()
+        self.screenshooter_factory = factory = ScreenshooterFactory(screenshooter)
+        self.screenshooter = self.screenshooter_factory.create()
 
         self.saved_last_image = False
         self.last_save_file = None
@@ -41,6 +41,13 @@ class Gscreenshot(object):
 
     def get_screenshooter_name(self):
         return self.screenshooter.__class__.__name__
+
+    def get_available_screenshooters(self):
+        return self.screenshooter_factory.get_available_screenshooters()
+
+    def set_screenshooter(self, screenshooter_name):
+        if self.screenshooter_factory.select_screenshooter(screenshooter_name):
+            self.screenshooter = self.screenshooter_factory.create()
 
     def screenshot_full_display(self, delay=0):
         """
